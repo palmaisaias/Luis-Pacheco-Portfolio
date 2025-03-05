@@ -170,44 +170,42 @@ const Projects: React.FC = () => {
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-4">Daily Sales Trend</h2>
           <div style={{ height: 400 }}>
-            <ResponsiveLine
-              data={inventoryLineData}
-              margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-              xScale={{ type: 'point' }}
-              yScale={{
-                type: 'linear',
-                min: 'auto',
-                max: 'auto',
-                stacked: false,
-                reverse: false,
-              }}
-              axisTop={null}
-              axisRight={null}
-              axisBottom={{
-                orient: 'bottom',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'Day',
-                legendOffset: 36,
-                legendPosition: 'middle',
-              }}
-              axisLeft={{
-                orient: 'left',
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legend: 'Sales',
-                legendOffset: -40,
-                legendPosition: 'middle',
-              }}
-              pointSize={10}
-              pointColor={{ theme: 'background' }}
-              pointBorderWidth={2}
-              pointBorderColor={{ from: 'serieColor' }}
-              pointLabelYOffset={-12}
-              useMesh={true}
-            />
+          <ResponsiveLine
+  data={inventoryLineData}
+  margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
+  xScale={{ type: 'point' }}
+  yScale={{
+    type: 'linear',
+    min: 'auto',
+    max: 'auto',
+    stacked: false,
+    reverse: false,
+  }}
+  axisTop={null}
+  axisRight={null}
+  axisBottom={{
+    tickSize: 5,
+    tickPadding: 5,
+    tickRotation: 0,
+    legend: 'Day',
+    legendOffset: 36,
+    legendPosition: 'middle',
+  }}
+  axisLeft={{
+    tickSize: 5,
+    tickPadding: 5,
+    tickRotation: 0,
+    legend: 'Sales',
+    legendOffset: -40,
+    legendPosition: 'middle',
+  }}
+  pointSize={10}
+  pointColor={{ theme: 'background' }}
+  pointBorderWidth={2}
+  pointBorderColor={{ from: 'serieColor' }}
+  pointLabelYOffset={-12}
+  useMesh={true}
+/>
           </div>
         </div>
 
