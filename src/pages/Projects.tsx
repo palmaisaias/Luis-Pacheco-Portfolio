@@ -9,15 +9,15 @@ import { ResponsiveBar } from '@nivo/bar'
 // Example project data; replace with real projects as needed.
 const projects = [
   {
-    title: 'Project One',
-    description: 'A brief description of Project One.',
-    imageUrl: 'https://via.placeholder.com/400x300',
+    title: 'Seasonal Inventory Optimization',
+    description: 'Managed forecasting, allocation, and inventory turns for high-volume seasonal apparel, improving sell-through rates by 15% and reducing markdowns.',
+    imageUrl: 'https://images.unsplash.com/photo-1645614053029-cf233c28e6c9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     projectUrl: 'https://example.com/project-one',
   },
   {
-    title: 'Project Two',
-    description: 'A brief description of Project Two.',
-    imageUrl: 'https://via.placeholder.com/400x300',
+    title: 'Luxury Goods Inventory Control',
+    description: 'Implemented advanced inventory management techniques for luxury brands, streamlining stock levels, enhancing accuracy by 98%, and reducing shrinkage.',
+    imageUrl: 'https://images.unsplash.com/photo-1549194388-f61be84a6e9e?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     projectUrl: 'https://example.com/project-two',
   },
   // Add more projects here...

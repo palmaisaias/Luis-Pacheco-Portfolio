@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white p-6">
+    <footer className="mt-8 bg-gray-900 text-white p-6">
       <div className="container mx-auto text-center">
         <div className="flex justify-center space-x-4 mb-4">
           <motion.a
