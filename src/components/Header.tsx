@@ -21,7 +21,7 @@ const Header: React.FC = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="shadow-md rounded-b-2xl bg-transparent h-32"
+      className="relative shadow-md rounded-b-2xl bg-transparent h-32"
       style={{ fontFamily: 'var(--body-font)' }}
     >
       <div className="container mx-auto flex justify-between items-center h-full px-6">
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden rounded-b-2xl shadow-lg bg-transparent"
+            className="md:hidden absolute top-full left-0 right-0 z-50 rounded-b-2xl shadow-lg bg-white"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
