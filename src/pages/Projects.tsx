@@ -1,6 +1,6 @@
 // src/pages/Projects.tsx
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ProjectCard from '../components/ProjectCard'
 import AnimatedSection from '../components/AnimatedSection'
 import { ResponsiveCirclePacking } from '@nivo/circle-packing'
@@ -127,13 +127,24 @@ const inventoryCirclePackingData = {
 }
 
 const InventoryAccuracyChart = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640) // using 640px as mobile breakpoint
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const data = [
     {
-      location: 'Nordstrom Cerritos',
+      location: 'Cerritos',
       Accuracy: 97.7,
     },
     {
-      location: 'Nordstrom Brea',
+      location: 'Brea',
       Accuracy: 95.2,
     },
     {
@@ -141,25 +152,33 @@ const InventoryAccuracyChart = () => {
       Accuracy: 94.8,
     },
     {
-      location: 'Company-wide Avg.',
+      location: 'Company Avg.',
       Accuracy: 93.6,
     },
-  ];
+  ]
+
+  // On mobile, rotate the tick labels 45° with extra padding
+  const tickRotation = isMobile ? 45 : 0
+  const tickPadding = isMobile ? 10 : 5
+  // Increase bottom margin on mobile to prevent text from being cut off
+  const margin = isMobile
+    ? { top: 50, right: 130, bottom: 80, left: 60 }
+    : { top: 50, right: 130, bottom: 50, left: 60 }
 
   return (
     <ResponsiveBar
       data={data}
       keys={['Accuracy']}
       indexBy="location"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={margin}
       padding={0.3}
       colors={{ scheme: 'nivo' }}
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       axisBottom={{
         tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: 'Location',
+        tickPadding: tickPadding,
+        tickRotation: tickRotation,
+        legend: isMobile ? '' : 'Location',
         legendPosition: 'middle',
         legendOffset: 32,
       }}
@@ -176,8 +195,8 @@ const InventoryAccuracyChart = () => {
       labelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
       animate={true}
     />
-  );
-};
+  )
+}
 
 const Projects: React.FC = () => {
   return (
