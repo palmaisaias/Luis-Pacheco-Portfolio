@@ -3,7 +3,6 @@
 import React from 'react'
 import ProjectCard from '../components/ProjectCard'
 import AnimatedSection from '../components/AnimatedSection'
-import { ResponsiveSankey } from '@nivo/sankey'
 import { ResponsiveCirclePacking } from '@nivo/circle-packing'
 import { ResponsiveBar } from '@nivo/bar'
 
@@ -24,54 +23,104 @@ const projects = [
   // Add more projects here...
 ]
 
-// Dummy data for inventory metrics (Sankey Chart)
-const inventorySankeyData = {
-  nodes: [
-    { id: "Raw Materials" },
-    { id: "Assembly" },
-    { id: "Quality Check" },
-    { id: "Packaging" },
-    { id: "Distribution" },
-    { id: "Retail" },
-    { id: "Returns" },
-  ],
-  links: [
-    { source: "Raw Materials", target: "Assembly", value: 100 },
-    { source: "Assembly", target: "Quality Check", value: 90 },
-    { source: "Quality Check", target: "Packaging", value: 80 },
-    { source: "Packaging", target: "Distribution", value: 70 },
-    { source: "Distribution", target: "Retail", value: 60 },
-    { source: "Retail", target: "Returns", value: 10 },
-    { source: "Assembly", target: "Retail", value: 20 },
-  ],
-}
-
-// Dummy data for inventory metrics (Circle Packing)
+// Enhanced dummy data for inventory metrics (Circle Packing) - Complex & Interesting
 const inventoryCirclePackingData = {
-  name: 'Inventory',
+  name: 'Nordstrom Inventory',
   children: [
     {
-      name: 'Electronics',
-      loc: 120,
+      name: 'Apparel',
+      loc: 300,
       children: [
-        { name: 'Mobiles', loc: 70 },
-        { name: 'Laptops', loc: 50 },
+        {
+          name: 'Men',
+          loc: 150,
+          children: [
+            { name: 'Shirts', loc: 50 },
+            { name: 'Pants', loc: 40 },
+            { name: 'Jackets', loc: 30 },
+            { name: 'Accessories', loc: 30 },
+          ],
+        },
+        {
+          name: 'Women',
+          loc: 150,
+          children: [
+            { name: 'Dresses', loc: 60 },
+            { name: 'Tops', loc: 40 },
+            { name: 'Skirts', loc: 30 },
+            { name: 'Accessories', loc: 20 },
+          ],
+        },
       ],
     },
     {
-      name: 'Clothing',
-      loc: 80,
-      children: [
-        { name: 'Men', loc: 40 },
-        { name: 'Women', loc: 40 },
-      ],
-    },
-    {
-      name: 'Groceries',
+      name: 'Footwear',
       loc: 200,
       children: [
-        { name: 'Fruits', loc: 80 },
-        { name: 'Vegetables', loc: 120 },
+        {
+          name: 'Men',
+          loc: 100,
+          children: [
+            { name: 'Sneakers', loc: 40 },
+            { name: 'Formal', loc: 30 },
+            { name: 'Boots', loc: 30 },
+          ],
+        },
+        {
+          name: 'Women',
+          loc: 100,
+          children: [
+            { name: 'Heels', loc: 40 },
+            { name: 'Flats', loc: 30 },
+            { name: 'Boots', loc: 30 },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Beauty',
+      loc: 150,
+      children: [
+        {
+          name: 'Skincare',
+          loc: 80,
+          children: [
+            { name: 'Moisturizers', loc: 40 },
+            { name: 'Cleansers', loc: 20 },
+            { name: 'Serums', loc: 20 },
+          ],
+        },
+        {
+          name: 'Makeup',
+          loc: 70,
+          children: [
+            { name: 'Lipsticks', loc: 30 },
+            { name: 'Foundations', loc: 20 },
+            { name: 'Mascara', loc: 20 },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'Accessories',
+      loc: 100,
+      children: [
+        {
+          name: 'Bags',
+          loc: 60,
+          children: [
+            { name: 'Handbags', loc: 40 },
+            { name: 'Backpacks', loc: 20 },
+          ],
+        },
+        {
+          name: 'Watches',
+          loc: 40,
+          children: [
+            { name: 'Smartwatches', loc: 20 },
+            { name: 'Luxury', loc: 20 },
+          ],
+        },
       ],
     },
   ],
@@ -137,65 +186,11 @@ const Projects: React.FC = () => {
       <section>
         <h1 className="mt-8 text-4xl font-bold mb-8">Metrics</h1>
         
-        {/* Sankey Chart for Inventory Flow */}
-        <div className="mt-6">
-          <h2 className="text-2xl font-semibold mb-4">Inventory Flow</h2>
-          <div style={{ height: 500 }}>
-            <ResponsiveSankey
-              data={inventorySankeyData}
-              margin={{ top: 40, right: 160, bottom: 40, left: 50 }}
-              align="justify"
-              colors={{ scheme: 'category10' }}
-              nodeOpacity={1}
-              nodeHoverOthersOpacity={0.35}
-              nodeThickness={18}
-              nodeSpacing={24}
-              nodeBorderWidth={0}
-              nodeBorderColor={{
-                from: 'color',
-                modifiers: [['darker', 0.8]],
-              }}
-              nodeBorderRadius={3}
-              linkOpacity={0.5}
-              linkHoverOthersOpacity={0.1}
-              linkContract={3}
-              enableLinkGradient={true}
-              labelPosition="outside"
-              labelOrientation="vertical"
-              labelPadding={16}
-              labelTextColor={{
-                from: 'color',
-                modifiers: [['darker', 1]],
-              }}
-              legends={[
-                {
-                  anchor: 'bottom-right',
-                  direction: 'column',
-                  translateX: 130,
-                  itemWidth: 100,
-                  itemHeight: 14,
-                  itemDirection: 'right-to-left',
-                  itemsSpacing: 2,
-                  itemTextColor: '#999',
-                  symbolSize: 14,
-                  effects: [
-                    {
-                      on: 'hover',
-                      style: {
-                        itemTextColor: '#000'
-                      }
-                    }
-                  ]
-                }
-              ]}
-            />
-          </div>
-        </div>
-        
         {/* Inventory Accuracy Chart */}
         <div className="mt-12">
           <h2 className="text-2xl font-semibold mb-4">Inventory Accuracy</h2>
-          <div style={{ height: 400 }}>
+          {/* Responsive container: height adjusts on mobile */}
+          <div className="h-64 sm:h-80 md:h-[400px]">
             <InventoryAccuracyChart />
           </div>
         </div>
