@@ -4,8 +4,8 @@ import React from 'react'
 import ProjectCard from '../components/ProjectCard'
 import AnimatedSection from '../components/AnimatedSection'
 import { ResponsiveSankey } from '@nivo/sankey'
-import { ResponsiveLine } from '@nivo/line'
 import { ResponsiveCirclePacking } from '@nivo/circle-packing'
+import { ResponsiveBar } from '@nivo/bar'
 
 // Example project data; replace with real projects as needed.
 const projects = [
@@ -25,7 +25,6 @@ const projects = [
 ]
 
 // Dummy data for inventory metrics (Sankey Chart)
-// Creative example showing inventory flow through different stages.
 const inventorySankeyData = {
   nodes: [
     { id: "Raw Materials" },
@@ -47,33 +46,7 @@ const inventorySankeyData = {
   ],
 }
 
-// Dummy data for inventory metrics (Line Chart)
-// For example, daily sales figures for selected categories over a week.
-const inventoryLineData = [
-  {
-    id: 'Electronics',
-    data: [
-      { x: 'Mon', y: 20 },
-      { x: 'Tue', y: 30 },
-      { x: 'Wed', y: 25 },
-      { x: 'Thu', y: 35 },
-      { x: 'Fri', y: 45 },
-    ],
-  },
-  {
-    id: 'Clothing',
-    data: [
-      { x: 'Mon', y: 15 },
-      { x: 'Tue', y: 25 },
-      { x: 'Wed', y: 20 },
-      { x: 'Thu', y: 30 },
-      { x: 'Fri', y: 40 },
-    ],
-  },
-]
-
 // Dummy data for inventory metrics (Circle Packing)
-// Representing a hierarchy of inventory by category and subcategory.
 const inventoryCirclePackingData = {
   name: 'Inventory',
   children: [
@@ -103,6 +76,59 @@ const inventoryCirclePackingData = {
     },
   ],
 }
+
+const InventoryAccuracyChart = () => {
+  const data = [
+    {
+      location: 'Nordstrom Cerritos',
+      Accuracy: 97.7,
+    },
+    {
+      location: 'Nordstrom Brea',
+      Accuracy: 95.2,
+    },
+    {
+      location: 'SoCal Avg.',
+      Accuracy: 94.8,
+    },
+    {
+      location: 'Company-wide Avg.',
+      Accuracy: 93.6,
+    },
+  ];
+
+  return (
+    <ResponsiveBar
+      data={data}
+      keys={['Accuracy']}
+      indexBy="location"
+      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      padding={0.3}
+      colors={{ scheme: 'nivo' }}
+      borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: 'Location',
+        legendPosition: 'middle',
+        legendOffset: 32,
+      }}
+      axisLeft={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: 'Inventory Accuracy (%)',
+        legendPosition: 'middle',
+        legendOffset: -50,
+      }}
+      labelFormat={value => `${value}%`}
+      borderRadius={5}
+      labelTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
+      animate={true}
+    />
+  );
+};
 
 const Projects: React.FC = () => {
   return (
@@ -166,46 +192,11 @@ const Projects: React.FC = () => {
           </div>
         </div>
         
-        {/* Line Chart for Daily Sales */}
+        {/* Inventory Accuracy Chart */}
         <div className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">Daily Sales Trend</h2>
+          <h2 className="text-2xl font-semibold mb-4">Inventory Accuracy</h2>
           <div style={{ height: 400 }}>
-          <ResponsiveLine
-  data={inventoryLineData}
-  margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
-  xScale={{ type: 'point' }}
-  yScale={{
-    type: 'linear',
-    min: 'auto',
-    max: 'auto',
-    stacked: false,
-    reverse: false,
-  }}
-  axisTop={null}
-  axisRight={null}
-  axisBottom={{
-    tickSize: 5,
-    tickPadding: 5,
-    tickRotation: 0,
-    legend: 'Day',
-    legendOffset: 36,
-    legendPosition: 'middle',
-  }}
-  axisLeft={{
-    tickSize: 5,
-    tickPadding: 5,
-    tickRotation: 0,
-    legend: 'Sales',
-    legendOffset: -40,
-    legendPosition: 'middle',
-  }}
-  pointSize={10}
-  pointColor={{ theme: 'background' }}
-  pointBorderWidth={2}
-  pointBorderColor={{ from: 'serieColor' }}
-  pointLabelYOffset={-12}
-  useMesh={true}
-/>
+            <InventoryAccuracyChart />
           </div>
         </div>
 
