@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   const navItems = [
     { name: 'Home', path: '/', icon: <HiHome size={20} /> },
     { name: 'About', path: '/about', icon: <HiUser size={20} /> },
-    { name: 'Projects', path: '/projects', icon: <HiOutlineFolder size={20} /> },
+    { name: 'Metrics', path: '/projects', icon: <HiOutlineFolder size={20} /> },
     { name: 'Contact', path: '/contact', icon: <HiMail size={20} /> },
   ]
 
@@ -21,17 +21,20 @@ const Header: React.FC = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      // Transparent background, fixed height, and using the Inter font (via the CSS variable)
       className="shadow-md rounded-b-2xl bg-transparent h-32"
       style={{ fontFamily: 'var(--body-font)' }}
     >
       <div className="container mx-auto flex justify-between items-center h-full px-6">
-        {/* Title updated to "My Portfolio" with primary slate color */}
-        <Link
-          to="/"
-          className="text-3xl font-bold text-[var(--primary-color)] hover:text-[var(--secondary-color)] transition-colors"
-        >
-          My Portfolio
+        {/* Logo with Framer Motion animation */}
+        <Link to="/">
+          <motion.img
+            src="/lp_logo.webp"
+            alt="Logo"
+            className="w-20 h-auto"
+            initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          />
         </Link>
 
         {/* Desktop Navigation */}
